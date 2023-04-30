@@ -4,6 +4,7 @@ using FDC.Caixa.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FDC.Caixa.Infra.Data.Migrations
 {
     [DbContext(typeof(FluxoDeCaixaContext))]
-    partial class FluxoDeCaixaContextModelSnapshot : ModelSnapshot
+    [Migration("20230430203924_RemoverCascadeMode")]
+    partial class RemoverCascadeMode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

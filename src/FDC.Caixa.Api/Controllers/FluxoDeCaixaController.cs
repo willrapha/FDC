@@ -1,10 +1,12 @@
 using FDC.Caixa.Domain.Caixas.Interfaces;
 using FDC.Generics.Api.Controllers;
 using FDC.Generics.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FDC.Caixa.Api.Controllers
 {
+    [Authorize]
     public class FluxoDeCaixaController : BaseController
     {
         private readonly IAbrirFluxoDeCaixaService _abrirFluxoDeCaixaService;

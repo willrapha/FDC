@@ -9,9 +9,10 @@ namespace FDC.Caixa.Domain.Caixas.Services
         private readonly IFluxoDeCaixaRepository _fluxoDeCaixaRepository;
         private readonly IMapper _mapper;
 
-        public ObterFluxoDeCaixaService(IFluxoDeCaixaRepository fluxoDeCaixaRepository)
+        public ObterFluxoDeCaixaService(IFluxoDeCaixaRepository fluxoDeCaixaRepository, IMapper mapper)
         {
             _fluxoDeCaixaRepository = fluxoDeCaixaRepository;
+            _mapper = mapper;
         }
 
         public async Task<FluxoDeCaixaDto> Obter(long id)

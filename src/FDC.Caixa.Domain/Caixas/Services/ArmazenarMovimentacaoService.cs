@@ -14,10 +14,12 @@ namespace FDC.Caixa.Domain.Caixas.Services
         public ArmazenarMovimentacaoService(
             IFluxoDeCaixaRepository fluxoDeCaixaRepository,
             IDomainNotificationService<DomainNotification> notificacaoDeDominio,
-            IUnitOfWork unitOfWork) : base(notificacaoDeDominio)
+            IUnitOfWork unitOfWork,
+            IMovimentacaoRepository movimentacaoRepository) : base(notificacaoDeDominio)
         {
             _fluxoDeCaixaRepository = fluxoDeCaixaRepository;
             _unitOfWork = unitOfWork;
+            _movimentacaoRepository = movimentacaoRepository;
         }
 
         public async Task Armazenar(MovimentacaoDto dto)
@@ -52,7 +54,10 @@ namespace FDC.Caixa.Domain.Caixas.Services
         private bool PermiteLancarMovimentacao(FluxoDeCaixa fluxo)
         {
             if (fluxo == null)
+            {
                 NotificarValidacaoDominio("Fluxo de caixa não existe");
+                return false;
+            }
 
             if (fluxo.Situacao == Enums.SituacaoEnum.Fechado)
                 NotificarValidacaoDominio("Caixa esta fechado");

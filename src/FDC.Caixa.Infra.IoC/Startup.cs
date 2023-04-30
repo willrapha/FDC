@@ -2,6 +2,7 @@
 using FDC.Caixa.Domain.Caixas.Services;
 using FDC.Caixa.Infra.Data.Context;
 using FDC.Caixa.Infra.Data.Repositories;
+using FDC.Caixa.Infra.IoC.AutoMapper;
 using FDC.Generics.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,10 +13,7 @@ namespace FDC.Caixa.Infra.IoC
     public static class Startup
     {
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<FluxoDeCaixaContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-
+        {          
             services.AddScoped<IDomainNotificationService<DomainNotification>, DomainNotificationService>();
 
             services.AddScoped<IAbrirFluxoDeCaixaService, AbrirFluxoDeCaixaService>();
@@ -26,6 +24,8 @@ namespace FDC.Caixa.Infra.IoC
 
             services.AddScoped<IMovimentacaoRepository, MovimentacaoRepository>();
             services.AddScoped<IFluxoDeCaixaRepository, FluxoDeCaixaRepository>();
+
+            services.AddSingleton(AutoMapperConfiguration.Initialize().CreateMapper().RegisterMap());
         }
     }
 }

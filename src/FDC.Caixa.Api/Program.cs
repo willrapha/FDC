@@ -1,4 +1,6 @@
+using FDC.Caixa.Api.Configuration;
 using FDC.Caixa.Infra.IoC;
+using FDC.Generics.Api.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,16 +10,14 @@ builder.Configuration
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
     .AddEnvironmentVariables();
 
-builder.Services.AddControllers();
-
+builder.Services.AddApiConfiguration(builder.Configuration);
+builder.Services.AddJwtConfiguration(builder.Configuration);
+builder.Services.AddSwaggerConfiguration();
 builder.Services.RegisterServices(builder.Configuration);
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+app.UseSwaggerConfiguration();
+app.UseApiConfiguration(builder.Environment);
 
 app.Run();

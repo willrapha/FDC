@@ -31,6 +31,8 @@ namespace FDC.Caixa.Infra.Data.Mappings
                 .WithMany(m => m.Movimentacoes)
                 .HasForeignKey(m => m.FluxoDeCaixaId);
 
+            builder.Ignore(_ => _.CascadeMode);
+
             builder.ToTable(nameof(Movimentacao));
         }
     }

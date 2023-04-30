@@ -1,4 +1,6 @@
-﻿namespace FDC.Seguranca.Api.Configuration
+﻿using FDC.Generics.Api.Configuration;
+
+namespace FDC.Seguranca.Api.Configuration
 {
     public static class ApiConfig
     {
@@ -20,7 +22,7 @@
 
             app.UseRouting();
 
-            app.UseIdentityConfiguration(); 
+            app.UseAuthConfiguration(); 
 
             app.UseEndpoints(endpoints =>
             {

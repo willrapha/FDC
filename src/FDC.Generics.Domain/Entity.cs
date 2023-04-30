@@ -19,7 +19,7 @@ namespace FDC.Generics.Domain
         protected Entity()
         {
             Id = default(TId);
-            ValidationResult = new ValidationResult(null);
+            ValidationResult = new ValidationResult();
         }
 
         public override bool Equals(object obj)

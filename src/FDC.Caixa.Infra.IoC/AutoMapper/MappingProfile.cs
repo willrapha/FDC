@@ -8,19 +8,19 @@ namespace FDC.Caixa.Infra.IoC.AutoMapper
     {
         public MappingProfile()
         {
-            CreateMap<FluxoDeCaixaDto, FluxoDeCaixa>()
+            CreateMap<FluxoDeCaixa, FluxoDeCaixaDto>()
                 .ForMember(d => d.Id, dto => dto.MapFrom(s => s.Id))
                 .ForMember(d => d.Saldo, dto => dto.MapFrom(s => s.Saldo))
                 .ForMember(d => d.Situacao, dto => dto.MapFrom(s => s.Situacao))
-                .ForMember(d => d.Movimentacoes, dto => dto.MapFrom(s => s.Movimentacoes))
+                .ForMember(d => d.Movimentacoes, dto => dto.MapFrom(s => s.Movimentacoes.Select(m => new MovimentacaoDto
+                {
+                    Descricao = m.Descricao,
+                    Tipo = m.Tipo,
+                    FluxoDeCaixaId = m.FluxoDeCaixaId,
+                    Id = m.Id,
+                    Valor = m.Valor
+                })))
                 .ForMember(d => d.Data, dto => dto.MapFrom(s => s.Data));
-
-            CreateMap<Movimentacao, MovimentacaoDto>()
-                .ForMember(d => d.FluxoDeCaixaId, dto => dto.MapFrom(s => s.FluxoDeCaixaId))
-                .ForMember(d => d.Tipo, dto => dto.MapFrom(s => s.Tipo))
-                .ForMember(d => d.Descricao, dto => dto.MapFrom(s => s.Descricao))
-                .ForMember(d => d.Id, dto => dto.MapFrom(s => s.Id))
-                .ForMember(d => d.Valor, dto => dto.MapFrom(s => s.Valor));
         }
     }
 }

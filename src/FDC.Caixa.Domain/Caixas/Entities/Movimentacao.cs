@@ -1,5 +1,6 @@
 ﻿using FDC.Caixa.Domain.Caixas.Enums;
 using FDC.Generics.Domain;
+using FluentValidation;
 
 namespace FDC.Caixa.Domain.Caixas.Entities
 {
@@ -41,7 +42,20 @@ namespace FDC.Caixa.Domain.Caixas.Entities
 
         public override bool Validar()
         {
-            throw new NotImplementedException();
+            RuleFor(r => r.DataHora)
+               .GreaterThanOrEqualTo(DateTime.Today);
+
+            RuleFor(r => r.Descricao)
+               .NotEmpty();
+
+            RuleFor(r => r.Valor)
+               .NotEqual(0);
+
+            RuleFor(r => r.FluxoDeCaixaId)
+               .GreaterThan(0);
+
+            ValidationResult = Validate(this);
+            return ValidationResult.IsValid;
         }
     }
 }

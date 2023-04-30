@@ -15,6 +15,8 @@ namespace FDC.Caixa.Infra.Data.Mappings
 
             builder.Ignore(_ => _.Saldo);
 
+            builder.Ignore(_ => _.CascadeMode);
+
             builder.ToTable(nameof(FluxoDeCaixa));
         }
     }
