@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FDC.Generics.Domain;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FDC.Generics.Api.Controllers
@@ -6,7 +7,12 @@ namespace FDC.Generics.Api.Controllers
     [ApiController]
     public abstract class BaseController : Controller
     {
-        protected ICollection<string> Erros = new List<string>();
+        protected readonly IDomainNotificationService<DomainNotification> NotificacaoDeDominio;
+
+        protected BaseController(IDomainNotificationService<DomainNotification> notificacaoDeDominio)
+        {
+            NotificacaoDeDominio = notificacaoDeDominio;
+        }
 
         protected ActionResult CustomResponse(object result = null)
         {
@@ -16,7 +22,7 @@ namespace FDC.Generics.Api.Controllers
             }
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]> {
-                { "mensagens", Erros.ToArray() }
+                { "mensagens", NotificacaoDeDominio.GetNotifications().Select(n => n.Value).ToArray() }
             }));
         }
 
@@ -33,17 +39,19 @@ namespace FDC.Generics.Api.Controllers
 
         protected bool OperacaoValida()
         {
-            return !Erros.Any();
+            return !NotificacaoDeDominio.HasNotifications();
         }
 
         protected void AdicionarErroProcessamento(string erro)
         {
-            Erros.Add(erro);
+            var notification = new DomainNotification(TipoDeNotificacao.ErroDeApi.ToString(), erro);
+
+            NotificacaoDeDominio.Add(notification);
         }
 
         protected void LimparErrosProcessamento()
         {
-            Erros.Clear();
+            NotificacaoDeDominio.Clean();
         }
     }
 }

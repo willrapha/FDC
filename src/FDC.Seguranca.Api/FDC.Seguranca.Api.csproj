@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FDC.Generics.Api\FDC.Generics.Api.csproj" />
+    <ProjectReference Include="..\FDC.Generics.Domain\FDC.Generics.Domain.csproj" />
   </ItemGroup>
 
 </Project>

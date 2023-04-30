@@ -1,18 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="FluentValidation" Version="8.6.2" />
-	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.3" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\FDC.Caixa.Resource\FDC.Caixa.Resource.csproj" />
     <ProjectReference Include="..\FDC.Generics.Domain\FDC.Generics.Domain.csproj" />
   </ItemGroup>
 

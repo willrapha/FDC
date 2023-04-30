@@ -1,12 +1,18 @@
+using FDC.Caixa.Infra.IoC;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Configuration
+    .SetBasePath(builder.Environment.ContentRootPath)
+    .AddJsonFile("appsettings.json", true, true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
+    .AddEnvironmentVariables();
 
 builder.Services.AddControllers();
 
-var app = builder.Build();
+builder.Services.RegisterServices(builder.Configuration);
 
-// Configure the HTTP request pipeline.
+var app = builder.Build();
 
 app.UseHttpsRedirection();
 

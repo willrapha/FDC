@@ -1,4 +1,5 @@
 ﻿using FDC.Generics.Api.Controllers;
+using FDC.Generics.Domain;
 using FDC.Seguranca.Api.Domain.Identity.Interfaces;
 using FDC.Seguranca.Api.Domain.Token.Interfaces;
 using FDC.Seguranca.Api.Models;
@@ -15,7 +16,9 @@ namespace FDC.Seguranca.Api.Controllers
         public AuthController(
             ITokenService tokenService, 
             ISignInManagerService signInManagerService, 
-            IUserManagerService userManagerService)
+            IUserManagerService userManagerService,
+            IDomainNotificationService<DomainNotification> notificacaoDeDominio)
+            : base(notificacaoDeDominio)
         {
             _tokenService = tokenService;
             _signInManagerService = signInManagerService;

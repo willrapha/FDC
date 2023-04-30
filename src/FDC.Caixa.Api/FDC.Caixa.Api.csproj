@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -9,6 +9,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FDC.Caixa.Infra.IoC\FDC.Caixa.Infra.IoC.csproj" />
+    <ProjectReference Include="..\FDC.Generics.Api\FDC.Generics.Api.csproj" />
+    <ProjectReference Include="..\FDC.Generics.Domain\FDC.Generics.Domain.csproj" />
   </ItemGroup>
 
 </Project>
