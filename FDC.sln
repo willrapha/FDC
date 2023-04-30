@@ -17,17 +17,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FDC.Generics.Api", "src\FDC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FDC.Caixa.Api", "src\FDC.Caixa.Api\FDC.Caixa.Api.csproj", "{C776415B-8715-4E2B-B5AD-65AF066CDA45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDC.Caixa.Domain", "src\FDC.Caixa.Domain\FDC.Caixa.Domain.csproj", "{17A304B1-0FFA-4A13-BAE2-13857F9C6BC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FDC.Caixa.Domain", "src\FDC.Caixa.Domain\FDC.Caixa.Domain.csproj", "{17A304B1-0FFA-4A13-BAE2-13857F9C6BC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDC.Caixa.Infra.Data", "src\FDC.Caixa.Infra.Data\FDC.Caixa.Infra.Data.csproj", "{B741C0A9-684E-47AB-8232-82878604A0A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FDC.Caixa.Infra.Data", "src\FDC.Caixa.Infra.Data\FDC.Caixa.Infra.Data.csproj", "{B741C0A9-684E-47AB-8232-82878604A0A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDC.Caixa.Infra.IoC", "src\FDC.Caixa.Infra.IoC\FDC.Caixa.Infra.IoC.csproj", "{928F9C1D-CB9D-48A8-BC95-A3BA2802CE6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FDC.Caixa.Infra.IoC", "src\FDC.Caixa.Infra.IoC\FDC.Caixa.Infra.IoC.csproj", "{928F9C1D-CB9D-48A8-BC95-A3BA2802CE6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDC.Caixa.Resource", "src\FDC.Caixa.Resource\FDC.Caixa.Resource.csproj", "{4D2A72CB-41C5-4B61-8226-9B8A3DBDBDAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FDC.Caixa.Resource", "src\FDC.Caixa.Resource\FDC.Caixa.Resource.csproj", "{4D2A72CB-41C5-4B61-8226-9B8A3DBDBDAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDC.Caixa.Infra.Query", "src\FDC.Caixa.Infra.Query\FDC.Caixa.Infra.Query.csproj", "{71376E28-5C5E-43DD-84EE-4E1B28651E06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FDC.Caixa.Infra.Query", "src\FDC.Caixa.Infra.Query\FDC.Caixa.Infra.Query.csproj", "{71376E28-5C5E-43DD-84EE-4E1B28651E06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDC.Generics.Domain", "src\FDC.Generics.Domain\FDC.Generics.Domain.csproj", "{AC4CEED4-9DD3-475A-B093-0814AD7B2D4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FDC.Generics.Domain", "src\FDC.Generics.Domain\FDC.Generics.Domain.csproj", "{AC4CEED4-9DD3-475A-B093-0814AD7B2D4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDC.Generics.Infra", "src\FDC.Generics.Infra\FDC.Generics.Infra.csproj", "{CBB7A34C-52BE-4942-B50E-D6B0FC882EB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{AC4CEED4-9DD3-475A-B093-0814AD7B2D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC4CEED4-9DD3-475A-B093-0814AD7B2D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC4CEED4-9DD3-475A-B093-0814AD7B2D4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBB7A34C-52BE-4942-B50E-D6B0FC882EB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBB7A34C-52BE-4942-B50E-D6B0FC882EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBB7A34C-52BE-4942-B50E-D6B0FC882EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBB7A34C-52BE-4942-B50E-D6B0FC882EB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{4D2A72CB-41C5-4B61-8226-9B8A3DBDBDAC} = {F6AA5DD7-4473-4096-BB49-3B7F4E6CA0DE}
 		{71376E28-5C5E-43DD-84EE-4E1B28651E06} = {F6AA5DD7-4473-4096-BB49-3B7F4E6CA0DE}
 		{AC4CEED4-9DD3-475A-B093-0814AD7B2D4A} = {A4286E57-DA8C-4EEB-AC69-58A53521995A}
+		{CBB7A34C-52BE-4942-B50E-D6B0FC882EB5} = {A4286E57-DA8C-4EEB-AC69-58A53521995A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B7C05E4C-C6FB-44F3-83A7-380AF76D9824}

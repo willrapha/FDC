@@ -16,5 +16,10 @@ namespace FDC.Generics.Domain
             foreach (var erro in validationResult.Errors)
                 NotificacaoDeDominio.Add(new DomainNotification(TipoDeNotificacao.ErroDeDominio.ToString(), erro.ErrorMessage));
         }
+
+        public void NotificarValidacaoDominio(string msg)
+        {
+            NotificacaoDeDominio.Add(new DomainNotification(TipoDeNotificacao.ErroDeDominio.ToString(), msg));
+        }
     }
 }

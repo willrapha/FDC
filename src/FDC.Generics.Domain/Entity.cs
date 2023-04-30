@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using System.ComponentModel.DataAnnotations;
+using FluentValidation.Results;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FDC.Generics.Domain

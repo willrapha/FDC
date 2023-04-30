@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FDC.Caixa.Resource\FDC.Caixa.Resource.csproj" />
-    <ProjectReference Include="..\FDC.Generics.Domain\FDC.Generics.Domain.csproj" />
+    <ProjectReference Include="..\FDC.Generics.Infra\FDC.Generics.Infra.csproj" />
   </ItemGroup>
 
 </Project>

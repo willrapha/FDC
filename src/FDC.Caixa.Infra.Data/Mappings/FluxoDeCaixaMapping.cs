@@ -13,8 +13,7 @@ namespace FDC.Caixa.Infra.Data.Mappings
             builder.Property(c => c.Data)
                 .IsRequired();
 
-            builder.Property(c => c.Saldo)
-                .IsRequired();
+            builder.Ignore(_ => _.Saldo);
 
             builder.ToTable(nameof(FluxoDeCaixa));
         }

@@ -11,7 +11,7 @@ namespace FDC.Caixa.Infra.Data.Mappings
         {
             builder.HasKey(m => m.Id);
 
-            builder.Property(m => m.Periodo)
+            builder.Property(m => m.DataHora)
                 .IsRequired();
 
             builder.Property(m => m.Descricao)
