@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\FDC.Caixa.Domain\FDC.Caixa.Domain.csproj" />
+	  <ProjectReference Include="..\FDC.Caixa.Infra.Data.Rest\FDC.Caixa.Infra.Data.Rest.csproj" />
 	  <ProjectReference Include="..\FDC.Caixa.Infra.Data\FDC.Caixa.Infra.Data.csproj" />
 	</ItemGroup>
 

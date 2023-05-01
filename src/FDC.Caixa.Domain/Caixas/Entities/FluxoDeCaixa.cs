@@ -27,10 +27,18 @@ namespace FDC.Caixa.Domain.Caixas.Entities
 
         private decimal ObterSaldo()
         {
-            if (Movimentacoes.Count > 0)
+            if (Movimentacoes.Count == 0)
                 return decimal.Zero;
 
-            return Movimentacoes.Sum(m => m.Valor);
+            var debito = CalcularOperacao(TipoEmum.Debito);
+            var credito = CalcularOperacao(TipoEmum.Credito);
+
+            return (credito - debito);
+        }
+
+        private decimal CalcularOperacao(TipoEmum tipo)
+        {
+            return Movimentacoes.Where(p => p.Tipo == tipo).Sum(m => m.Valor);
         }
 
         public override bool Validar()

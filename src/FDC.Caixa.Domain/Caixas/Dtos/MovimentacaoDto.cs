@@ -1,5 +1,4 @@
-﻿using FDC.Caixa.Domain.Caixas.Entities;
-using FDC.Caixa.Domain.Caixas.Enums;
+﻿using FDC.Caixa.Domain.Caixas.Enums;
 
 namespace FDC.Caixa.Domain.Caixas.Dtos
 {
@@ -9,6 +8,7 @@ namespace FDC.Caixa.Domain.Caixas.Dtos
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
         public TipoEmum Tipo { get; set; }
+        public DateTime DataHora { get; set; }
         public long FluxoDeCaixaId { get; set; }
     }
 }

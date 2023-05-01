@@ -1,3 +1,4 @@
+using FDC.Caixa.Domain.Caixas.Dtos;
 using FDC.Caixa.Domain.Caixas.Interfaces;
 using FDC.Generics.Api.Controllers;
 using FDC.Generics.Domain;
@@ -9,24 +10,27 @@ namespace FDC.Caixa.Api.Controllers
     [Authorize]
     public class FluxoDeCaixaController : BaseController
     {
-        private readonly IAbrirFluxoDeCaixaService _abrirFluxoDeCaixaService;
+        private readonly IAlterarSituacaoFluxoDeCaixaService _alterarSituacaoFluxoDeCaixaService;
         private readonly IObterFluxoDeCaixaService _obterFluxoDeCaixaService;
+        private readonly IImprimirFluxoDeCaixaService _imprimirFluxoDeCaixaService;
 
         public FluxoDeCaixaController(
             IDomainNotificationService<DomainNotification> notificacaoDeDominio,
-            IAbrirFluxoDeCaixaService abrirFluxoDeCaixaService,
-            IObterFluxoDeCaixaService obterFluxoDeCaixaService) : base(notificacaoDeDominio)
+            IAlterarSituacaoFluxoDeCaixaService alterarSituacaoFluxoDeCaixaService,
+            IObterFluxoDeCaixaService obterFluxoDeCaixaService,
+            IImprimirFluxoDeCaixaService imprimirFluxoDeCaixaService) : base(notificacaoDeDominio)
         {
-            _abrirFluxoDeCaixaService = abrirFluxoDeCaixaService;
+            _alterarSituacaoFluxoDeCaixaService = alterarSituacaoFluxoDeCaixaService;
             _obterFluxoDeCaixaService = obterFluxoDeCaixaService;
+            _imprimirFluxoDeCaixaService = imprimirFluxoDeCaixaService;
         }
 
-        [HttpGet("Abrir")]
-        public async Task<IActionResult> Abrir()
+        [HttpGet("Alterar")]
+        public async Task<IActionResult> Alterar(FluxoDeCaixaDto dto)
         {
-            await _abrirFluxoDeCaixaService.AbrirFluxoDeCaixa();
+            await _alterarSituacaoFluxoDeCaixaService.Alterar(dto);
 
-            return CustomResponse(new { Caixa = "caixa aberto com sucesso" } );
+            return CustomResponse(new { Caixa = "opreção realizada com sucesso" } );
         }
 
         [HttpGet("Obter")]
@@ -35,6 +39,16 @@ namespace FDC.Caixa.Api.Controllers
             var fluxo = await _obterFluxoDeCaixaService.Obter(id);
 
             return CustomResponse(fluxo);
+        }
+
+        [HttpGet("Imprimir")]
+        public async Task<IActionResult> Imprimir(long id)
+        {
+            var token = HttpContext.Request.Headers["Authorization"];
+
+            var arquivo = await _imprimirFluxoDeCaixaService.Imprimir(id, token);
+
+            return File(arquivo.Arquivo, arquivo.ContentTypeXlxs, arquivo.Relatorio);
         }
     }
 }

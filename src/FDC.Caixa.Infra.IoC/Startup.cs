@@ -2,9 +2,9 @@
 using FDC.Caixa.Domain.Caixas.Services;
 using FDC.Caixa.Infra.Data.Context;
 using FDC.Caixa.Infra.Data.Repositories;
+using FDC.Caixa.Infra.Data.Rest.Caixas;
 using FDC.Caixa.Infra.IoC.AutoMapper;
 using FDC.Generics.Domain;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,9 +16,12 @@ namespace FDC.Caixa.Infra.IoC
         {          
             services.AddScoped<IDomainNotificationService<DomainNotification>, DomainNotificationService>();
 
-            services.AddScoped<IAbrirFluxoDeCaixaService, AbrirFluxoDeCaixaService>();
+            services.AddScoped<IAlterarSituacaoFluxoDeCaixaService, AlterarSituacaoFluxoDeCaixaService>();
             services.AddScoped<IArmazenadorDeMovimentacaoService, ArmazenarMovimentacaoService>();
             services.AddScoped<IObterFluxoDeCaixaService, ObterFluxoDeCaixaService>();
+            services.AddScoped<IImprimirFluxoDeCaixaService, ImprimirFluxoDeCaixaService>();
+
+            services.AddScoped<IImprimirFluxoDeCaixaRest, ImprimirFluxoDeCaixaRest>();
             
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
