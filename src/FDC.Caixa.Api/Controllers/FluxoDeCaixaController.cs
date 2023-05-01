@@ -25,12 +25,12 @@ namespace FDC.Caixa.Api.Controllers
             _imprimirFluxoDeCaixaService = imprimirFluxoDeCaixaService;
         }
 
-        [HttpGet("Alterar")]
-        public async Task<IActionResult> Alterar(FluxoDeCaixaDto dto)
+        [HttpPost("Caixa")]
+        public async Task<IActionResult> Caixa(FluxoDeCaixaSituacaoDto dto)
         {
             await _alterarSituacaoFluxoDeCaixaService.Alterar(dto);
 
-            return CustomResponse(new { Caixa = "opreção realizada com sucesso" } );
+            return CustomResponse(new { Caixa = "operacao realizada com sucesso" } );
         }
 
         [HttpGet("Obter")]

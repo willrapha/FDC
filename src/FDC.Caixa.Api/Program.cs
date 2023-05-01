@@ -1,4 +1,6 @@
 using FDC.Caixa.Api.Configuration;
+using FDC.Caixa.Infra.Data;
+using FDC.Caixa.Infra.Data.Context;
 using FDC.Caixa.Infra.IoC;
 using FDC.Generics.Api.Configuration;
 
@@ -19,5 +21,6 @@ var app = builder.Build();
 
 app.UseSwaggerConfiguration();
 app.UseApiConfiguration(builder.Environment);
+app.Services.RunMigration<FluxoDeCaixaContext>();
 
 app.Run();

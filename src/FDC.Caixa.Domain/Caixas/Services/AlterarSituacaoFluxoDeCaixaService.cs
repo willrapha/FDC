@@ -21,15 +21,14 @@ namespace FDC.Caixa.Domain.Caixas.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Alterar(FluxoDeCaixaDto dto)
+        public async Task Alterar(FluxoDeCaixaSituacaoDto dto)
         {
-            var fluxoDeCaixa = new FluxoDeCaixa(DateTime.Now, SituacaoEnum.Aberto);
+            var fluxoDeCaixa = new FluxoDeCaixa(DateTime.Now, dto.Situacao);
 
-            if (dto.Id > 0)
-            {
-                fluxoDeCaixa = await _fluxoDeCaixaRepository.ObterPorIdAsync(fluxoDeCaixa.Id);
-                fluxoDeCaixa.AlterarSituacao(dto.Situacao);
-            }
+            if (!VerificaSituacaoDoCaixa(dto))
+                return;
+
+            await AlterarCaixaExistenteAsync(dto);
 
             if (!fluxoDeCaixa.Validar())
             {
@@ -41,6 +40,36 @@ namespace FDC.Caixa.Domain.Caixas.Services
                 await _fluxoDeCaixaRepository.AdicionarAsync(fluxoDeCaixa);
 
             await _unitOfWork.Commit();
+        }
+
+        private bool VerificaSituacaoDoCaixa(FluxoDeCaixaSituacaoDto dto)
+        {
+            if (dto.Id > 0)
+                return true;
+
+            if (dto.Situacao == SituacaoEnum.Aberto)
+                return true;
+
+            NotificarValidacaoDominio("Não é possivel abrir o caixa com o estado fechado");
+
+            return false;
+        }
+
+       private async Task AlterarCaixaExistenteAsync(FluxoDeCaixaSituacaoDto dto)
+        {
+            if (dto.Id == 0)
+                return;
+
+            var fluxoDeCaixa = await _fluxoDeCaixaRepository.ObterPorIdAsync(dto.Id);
+
+            if (fluxoDeCaixa == null)
+            {
+                NotificarValidacaoDominio("Caixa não encontrado");
+                return;
+            }
+                
+
+            fluxoDeCaixa.AlterarSituacao(dto.Situacao);
         }
     }
 }

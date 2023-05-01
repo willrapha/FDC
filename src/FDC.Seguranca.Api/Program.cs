@@ -1,4 +1,5 @@
 using FDC.Seguranca.Api.Configuration;
+using FDC.Seguranca.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,5 +18,6 @@ var app = builder.Build();
 
 app.UseSwaggerConfiguration();
 app.UseApiConfiguration(builder.Environment);
+app.Services.RunMigration<ApplicationDbContext>();
 
 app.Run();

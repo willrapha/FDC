@@ -1,0 +1,82 @@
+version: '2'
+
+services:
+        
+  fdccaixa:
+    build:
+      context: .
+      dockerfile: CaixaDockerfile
+    image: willrapha/fdccaixa
+    container_name: fdccaixa
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 0.5GB
+    restart: unless-stopped
+    networks:
+      - fdc_vnet
+    ports:
+      - "6002:80"
+    depends_on:
+        - fdcmssql
+      
+  fdcrelatorio:
+    build:
+      context: .
+      dockerfile: RelatorioDockerfile
+    image: willrapha/fdcrelatorio
+    container_name: fdcrelatorio
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 0.5GB
+    networks:
+      - fdc_vnet
+    restart: unless-stopped
+    ports:
+      - "6003:80"
+    depends_on:
+        - fdcmssql
+
+  fdcseguranca:
+    build:
+      context: .
+      dockerfile: SegurancaDockerfile
+    image: willrapha/fdcseguranca
+    container_name: fdcseguranca
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 0.5GB
+    networks:
+      - fdc_vnet
+    restart: unless-stopped
+    ports:
+      - "6004:80"
+    depends_on:
+        - fdcmssql
+      
+  fdcmssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: fdcsqlserver
+    ports:
+      - 6005:1433
+    volumes:
+      - ./sql/backup:/var/lib/mssqlql/data
+      - ./sql/data:/var/opt/mssql/data
+      - ./sql/secrets:/var/opt/mssql/secrets
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=P455w0rd
+    restart: unless-stopped
+    networks:
+      - fdc_vnet      
+      
+networks:
+  fdc_vnet:
+    name: alpha_vnet
+    external: true
+
