@@ -126,7 +126,6 @@ services:
             - fdc_vnet    
       
 networks:
-  fdc_vnet:
-    name: fdc_vnet    
-    external: true
+    fdc_vnet:
+        driver: bridge
 
