@@ -127,6 +127,6 @@ services:
       
 networks:
   fdc_vnet:
-    name: alpha_vnet
+    name: fdc_vnet    
     external: true
 
