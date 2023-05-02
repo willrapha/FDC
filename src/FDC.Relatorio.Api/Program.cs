@@ -16,7 +16,7 @@ builder.Services.RegisterServices();
 
 var app = builder.Build();
 
-app.UseSwaggerConfiguration();
+app.UseSwaggerConfiguration(builder.Configuration);
 app.UseApiConfiguration(builder.Environment);
 
 app.Run();

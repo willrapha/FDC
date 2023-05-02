@@ -20,7 +20,7 @@ namespace FDC.Caixa.Infra.Data.Rest.Caixas
         {
             var arquivo = new ArquivoDto();
 
-            var request = new RestRequest("/ObterRelatorioFluxoDeCaixa", Method.Post);
+            var request = new RestRequest("/api/Relatorio/ObterRelatorioFluxoDeCaixa", Method.Post);
             request.AddHeader("Authorization", token);
             request.AddJsonBody(dto);
 

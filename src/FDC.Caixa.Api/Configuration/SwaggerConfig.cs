@@ -1,4 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace FDC.Caixa.Api.Configuration
 {
@@ -44,11 +45,27 @@ namespace FDC.Caixa.Api.Configuration
             return services;
         }
 
-        public static IApplicationBuilder UseSwaggerConfiguration(this IApplicationBuilder app)
+        public static IApplicationBuilder UseSwaggerConfiguration(this IApplicationBuilder app, IConfiguration configuration)
         {
-            app.UseSwagger();
-            app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"); 
+            var basePath = configuration["AppSettings:BasePath"];
+
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "swagger/{documentName}/swagger.json";
+                c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
+                {
+                    swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{basePath}" } };
+                });
+            });
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint($"{basePath}/swagger/v1/swagger.json", "API V1");
+                c.InjectStylesheet($"{basePath}/swagger-ui/custom.css");
+                c.DocExpansion(DocExpansion.None);
+                c.OAuthClientId("swagger-ui");
+                c.OAuthClientSecret("swagger-ui-secret");
+                c.OAuthRealm("swagger-ui-realm");
+                c.OAuthAppName("Swagger UI");
             });
 
             return app;

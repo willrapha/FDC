@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace FDC.Generics.Api.Controllers
 {
     [ApiController]
+    [Produces("application/json")]
+    [Route("api/[controller]")]
     public abstract class BaseController : Controller
     {
         protected readonly IDomainNotificationService<DomainNotification> NotificacaoDeDominio;

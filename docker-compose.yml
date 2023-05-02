@@ -16,8 +16,6 @@ services:
     restart: unless-stopped
     networks:
       - fdc_vnet
-    ports:
-      - "6002:80"
     depends_on:
         - fdcmssql
       
@@ -35,8 +33,6 @@ services:
     networks:
       - fdc_vnet
     restart: unless-stopped
-    ports:
-      - "6003:80"
     depends_on:
         - fdcmssql
 
@@ -54,10 +50,29 @@ services:
     networks:
       - fdc_vnet
     restart: unless-stopped
-    ports:
-      - "6004:80"
     depends_on:
         - fdcmssql
+        
+  nginx:
+    build:
+      context: ./nginx 
+      dockerfile: Dockerfile
+    image: willrapha/nginx
+    container_name: fdcnginx
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 0.5GB
+    networks:
+      - fdc_vnet
+    ports:
+      - "80:80"
+    depends_on:
+        - fdcseguranca
+        - fdcrelatorio
+        - fdccaixa
+    restart: unless-stopped
       
   fdcmssql:
     image: mcr.microsoft.com/mssql/server:2019-latest

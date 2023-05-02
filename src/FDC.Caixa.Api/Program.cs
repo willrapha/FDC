@@ -19,7 +19,7 @@ builder.Services.RegisterServices(builder.Configuration);
 
 var app = builder.Build();
 
-app.UseSwaggerConfiguration();
+app.UseSwaggerConfiguration(builder.Configuration);
 app.UseApiConfiguration(builder.Environment);
 app.Services.RunMigration<FluxoDeCaixaContext>();
 
