@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FDC.Generics.Bus\FDC.Generics.Bus.csproj" />
     <ProjectReference Include="..\FDC.Generics.Domain\FDC.Generics.Domain.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,10 @@
 ﻿using FDC.Generics.Api.Controllers;
+using FDC.Generics.Bus;
+using FDC.Generics.Bus.Abstractations;
 using FDC.Generics.Domain;
 using FDC.Seguranca.Api.Domain.Identity.Interfaces;
 using FDC.Seguranca.Api.Domain.Token.Interfaces;
+using FDC.Seguranca.Api.Events;
 using FDC.Seguranca.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,17 +15,20 @@ namespace FDC.Seguranca.Api.Controllers
         private readonly ITokenService _tokenService;
         private readonly ISignInManagerService _signInManagerService;
         private readonly IUserManagerService _userManagerService;
+        private readonly IEventBus _eventBus;
 
         public AuthController(
-            ITokenService tokenService, 
-            ISignInManagerService signInManagerService, 
+            ITokenService tokenService,
+            ISignInManagerService signInManagerService,
             IUserManagerService userManagerService,
-            IDomainNotificationService<DomainNotification> notificacaoDeDominio)
+            IDomainNotificationService<DomainNotification> notificacaoDeDominio,
+            IEventBus eventBus)
             : base(notificacaoDeDominio)
         {
             _tokenService = tokenService;
             _signInManagerService = signInManagerService;
             _userManagerService = userManagerService;
+            _eventBus = eventBus;
         }
 
         [HttpPost("criar-conta")]
@@ -34,6 +40,18 @@ namespace FDC.Seguranca.Api.Controllers
 
             if (result.Succeeded)
             {
+                var evento = EventBusOptions.Config(
+                "fdc-integracao-pessoa-fisica",
+                "fdc-integracao-pessoa-fisica",
+                withDeadletter: true);
+
+                var usuario = new UsuarioEvent()
+                {
+                    Email = usuarioRegistro.Email,
+                };
+
+                _eventBus.Publish(usuario, evento);
+
                 return CustomResponse(await _tokenService.GerarJwt(usuarioRegistro.Email));
             }
 

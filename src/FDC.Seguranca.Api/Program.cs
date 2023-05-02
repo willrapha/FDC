@@ -1,3 +1,5 @@
+using Autofac.Extensions.DependencyInjection;
+using FDC.Generics.Api;
 using FDC.Seguranca.Api.Configuration;
 using FDC.Seguranca.Api.Data;
 
@@ -13,6 +15,9 @@ builder.Services.AddApiConfiguration();
 builder.Services.AddIdentityConfiguration(builder.Configuration);
 builder.Services.AddSwaggerConfiguration();
 builder.Services.RegisterServices();
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Services.AddRabbitMQConfiguration(builder.Configuration);
+
 
 var app = builder.Build();
 
