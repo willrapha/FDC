@@ -20,7 +20,7 @@ namespace FDC.Caixa.Api.Controllers
         }
 
         [HttpPost("Armazenar")]
-        public async Task<IActionResult> Armazenar(MovimentacaoDto movimentacao)
+        public async Task<IActionResult> Armazenar(AlterarMovimentacaoDto movimentacao)
         {
             await _armazenadorDeMovimentacaoService.Armazenar(movimentacao);
 

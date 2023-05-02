@@ -22,7 +22,7 @@ namespace FDC.Caixa.Domain.Caixas.Services
             _movimentacaoRepository = movimentacaoRepository;
         }
 
-        public async Task Armazenar(MovimentacaoDto dto)
+        public async Task Armazenar(AlterarMovimentacaoDto dto)
         {
             var fluxo = await _fluxoDeCaixaRepository.ObterPorIdAsync(dto.FluxoDeCaixaId);
 
