@@ -53,6 +53,23 @@ services:
     depends_on:
         - fdcmssql
         
+  fdccaixaservice:
+    build:
+      context: .
+      dockerfile: CaixaServiceDockerfile
+    image: willrapha/fdccaixaservice
+    container_name: fdccaixaservice
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 0.5GB
+    networks:
+      - fdc_vnet
+    restart: unless-stopped
+    depends_on:
+        - fdcrabbitmq
+        
   nginx:
     build:
       context: ./nginx 
@@ -88,7 +105,25 @@ services:
       - SA_PASSWORD=P455w0rd
     restart: unless-stopped
     networks:
-      - fdc_vnet      
+      - fdc_vnet
+
+  fdcrabbitmq:
+    image: rabbitmq:3.6
+    container_name: fdcrabbitmq
+    environment:
+      - "RABBITMQ_DEFAULT_PASS=8eVfq8DuUNX4"
+      - "RABBITMQ_DEFAULT_USER=user"
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 0.5GB
+    restart: unless-stopped
+    networks:
+            - fdc_vnet    
       
 networks:
   fdc_vnet:
