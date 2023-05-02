@@ -43,7 +43,8 @@ namespace FDC.Caixa.Domain.Caixas.Entities
         public override bool Validar()
         {
             RuleFor(r => r.DataHora)
-               .GreaterThanOrEqualTo(DateTime.Today);
+               .NotEmpty()
+               .NotNull();
 
             RuleFor(r => r.Descricao)
                .NotEmpty();
