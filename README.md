@@ -35,12 +35,15 @@ ObterRelatorioFluxoDeCaixa – Método para gerar relatório do fluxo de caixa, 
 ![alt text](docs/caixa.png)
 
 FluxoDeCaixa/Caixa – Método que criar um novo fluxo de caixa e tbm o fecha o caixa, necessário estar autenticado.
-Parâmetros: 
+
+Parâmetros:
 {
   "id": 0, (Zero para criação e maior que zero para edição)
   "situacao": 1 (Aberto = 1 e Fechado = 2)
 }
+
 FluxoDeCaixa/Obter – Método para obter o fluxo de caixa junto de suas movimentações. Recebe o id de um fluxo existente, necessário estar autenticado.
+
 FluxoDeCaixa/Imprimir – Método responsável para imprimir o fluxo de caixa. Recebe o id de um fluxo existente, necessário estar autenticado.
 
 ![alt text](docs/movimentacao.png)
