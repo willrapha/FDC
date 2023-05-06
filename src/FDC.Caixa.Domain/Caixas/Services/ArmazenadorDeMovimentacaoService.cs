@@ -5,13 +5,13 @@ using FDC.Generics.Domain;
 
 namespace FDC.Caixa.Domain.Caixas.Services
 {
-    public class ArmazenarMovimentacaoService : DomainService, IArmazenadorDeMovimentacaoService
+    public class ArmazenadorDeMovimentacaoService : DomainService, IArmazenadorDeMovimentacaoService
     {
         private readonly IFluxoDeCaixaRepository _fluxoDeCaixaRepository;
         private readonly IMovimentacaoRepository _movimentacaoRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ArmazenarMovimentacaoService(
+        public ArmazenadorDeMovimentacaoService(
             IFluxoDeCaixaRepository fluxoDeCaixaRepository,
             IDomainNotificationService<DomainNotification> notificacaoDeDominio,
             IUnitOfWork unitOfWork,

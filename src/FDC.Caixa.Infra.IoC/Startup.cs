@@ -17,7 +17,7 @@ namespace FDC.Caixa.Infra.IoC
             services.AddScoped<IDomainNotificationService<DomainNotification>, DomainNotificationService>();
 
             services.AddScoped<IAlterarSituacaoFluxoDeCaixaService, AlterarSituacaoFluxoDeCaixaService>();
-            services.AddScoped<IArmazenadorDeMovimentacaoService, ArmazenarMovimentacaoService>();
+            services.AddScoped<IArmazenadorDeMovimentacaoService, ArmazenadorDeMovimentacaoService>();
             services.AddScoped<IObterFluxoDeCaixaService, ObterFluxoDeCaixaService>();
             services.AddScoped<IImprimirFluxoDeCaixaService, ImprimirFluxoDeCaixaService>();
 
