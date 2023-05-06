@@ -49,6 +49,7 @@ FluxoDeCaixa/Imprimir – Método responsável para imprimir o fluxo de caixa. R
 ![alt text](docs/movimentacao.png)
 
 Método responsável para cadastrar ou editar as movimentações, necessário estar autenticado.
+
 {
   "id": 0, (Zero para criação e maior que zero para edição)
   "descricao": "string", (Descrição sobre o lançamento)
