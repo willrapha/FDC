@@ -23,12 +23,27 @@ namespace FDC.Caixa.Domain.Caixas.Services
 
         public async Task Alterar(FluxoDeCaixaSituacaoDto dto)
         {
-            var fluxoDeCaixa = new FluxoDeCaixa(DateTime.Now, dto.Situacao);
-
             if (!VerificaSituacaoDoCaixa(dto))
                 return;
 
-            await AlterarCaixaExistenteAsync(dto);
+            FluxoDeCaixa fluxoDeCaixa;
+
+            if (dto.Id > 0)
+            {
+                fluxoDeCaixa = await _fluxoDeCaixaRepository.ObterPorIdAsync(dto.Id);
+
+                if (fluxoDeCaixa == null)
+                {
+                    NotificarValidacaoDominio("Caixa não encontrado");
+                    return;
+                }
+
+                fluxoDeCaixa.AlterarSituacao(dto.Situacao);
+            }
+            else
+            {
+                fluxoDeCaixa = new FluxoDeCaixa(DateTime.Now, dto.Situacao);
+            }
 
             if (!fluxoDeCaixa.Validar())
             {
@@ -36,7 +51,7 @@ namespace FDC.Caixa.Domain.Caixas.Services
                 return;
             }
 
-            if (fluxoDeCaixa.Id == 0)
+            if (dto.Id == 0)
                 await _fluxoDeCaixaRepository.AdicionarAsync(fluxoDeCaixa);
 
             await _unitOfWork.Commit();
@@ -55,21 +70,5 @@ namespace FDC.Caixa.Domain.Caixas.Services
             return false;
         }
 
-       private async Task AlterarCaixaExistenteAsync(FluxoDeCaixaSituacaoDto dto)
-        {
-            if (dto.Id == 0)
-                return;
-
-            var fluxoDeCaixa = await _fluxoDeCaixaRepository.ObterPorIdAsync(dto.Id);
-
-            if (fluxoDeCaixa == null)
-            {
-                NotificarValidacaoDominio("Caixa não encontrado");
-                return;
-            }
-                
-
-            fluxoDeCaixa.AlterarSituacao(dto.Situacao);
-        }
     }
 }
